@@ -54,13 +54,18 @@ speaker:
     sample_rate: 16000
     channel: stereo  # The Echo has poor playback audio quality when using mon audio
     buffer_duration: 60ms
+  - platform: mixer
+    output_speaker: prlmnt_speaker
+    source_speakers:
+      - id: media_player.music_assistant
+      - id: media_player.vlc_telnet
 
 media_player:
   - platform: speaker
     name: None
     id: echo_media_player
     announcement_pipeline:
-      speaker: echo_speaker
+      speaker: prlmnt_speaker
       format: WAV
     codec_support_enabled: false
     buffer_size: 6000

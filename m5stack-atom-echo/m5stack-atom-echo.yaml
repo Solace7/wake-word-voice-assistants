@@ -76,9 +76,9 @@ media_player:
             - script.execute: stop_wake_word
       - light.turn_on:
           id: led
-          blue: 100%
-          red: 0%
-          green: 0%
+          blue: 18%
+          red: 98%
+          green: 74%
           brightness: 100%
           effect: none
     on_idle:
@@ -98,25 +98,30 @@ voice_assistant:
   on_listening:
     - light.turn_on:
         id: led
-        blue: 100%
+        blue: 0%
         red: 0%
-        green: 0%
+        green: 100%
         effect: "Slow Pulse"
   on_stt_vad_end:
     - light.turn_on:
         id: led
-        blue: 100%
+        blue: 0%
         red: 0%
-        green: 0%
+        green: 100%
         effect: "Fast Pulse"
   on_tts_start:
     - light.turn_on:
         id: led
-        blue: 100%
+        blue: 0%
         red: 0%
-        green: 0%
+        green: 100%
         brightness: 100%
         effect: none
+    - homeassistant.service:
+        service: tts.piper
+        data:
+          entity_id: media_player.music_assistant
+          message: !lambda 'return x;'
   on_end:
     # Handle the "nevermind" case where there is no announcement
     - wait_until:
@@ -161,8 +166,8 @@ voice_assistant:
     - light.turn_on:
         id: led
         red: 0%
-        green: 100%
-        blue: 0%
+        green: 0%
+        blue: 100%
         brightness: 100%
         effect: "Fast Pulse"
     - wait_until:
